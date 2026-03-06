@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - UniStay | Student Hostel Platform</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+
+<body>
+    <div class="signin-container">
+        <!-- Background Decoration -->
+        <div class="signin-background">
+            <div class="signin-shape-1"></div>
+            <div class="signin-shape-2"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="signin-content">
+            <!-- Logo Section -->
+            <div class="signin-logo-section">
+                <div class="signin-logo">🏠</div>
+                <h1>UniStay</h1>
+                <p>Find Your Perfect Student Home</p>
+            </div>
+
+            <!-- Welcome Message -->
+            <div class="signin-welcome">
+                <h2>Welcome to UniStay</h2>
+                <p>Your trusted platform for finding and managing student hostels</p>
+            </div>
+
+            <!-- Options Grid -->
+            <div class="signin-options">
+                <!-- Sign In Option -->
+                <div class="signin-option-card">
+                    <div class="signin-option-icon">👤</div>
+                    <h3>Existing User?</h3>
+                    <p>Sign in to your account</p>
+                    <a href="login.html" class="signin-btn signin-btn-primary signin-transition">
+                        Sign In
+                    </a>
+                </div>
+
+                <!-- Sign Up Option -->
+                <div class="signin-option-card">
+                    <div class="signin-option-icon">✨</div>
+                    <h3>New Member?</h3>
+                    <p>Create a new account</p>
+                    <a href="register.html" class="signin-btn signin-btn-secondary signin-transition">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="signin-info">
+                <div class="signin-info-item">
+                    <div class="signin-info-icon">🔍</div>
+                    <div class="signin-info-text">
+                        <h4>Browse Hostels</h4>
+                        <p>Find verified student hostels near your university</p>
+                    </div>
+                </div>
+
+                <div class="signin-info-item">
+                    <div class="signin-info-icon">💼</div>
+                    <div class="signin-info-text">
+                        <h4>Manage Properties</h4>
+                        <p>Landlords can manage listings and bookings</p>
+                    </div>
+                </div>
+
+                <div class="signin-info-item">
+                    <div class="signin-info-icon">🛡️</div>
+                    <div class="signin-info-text">
+                        <h4>Secure Platform</h4>
+                        <p>Your data is encrypted and protected</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="signin-footer">
+                <p><a href="home.html">← Back to Home</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth page transitions
+        document.querySelectorAll('.signin-transition').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        });
+
+        // Fade in animation when page loads
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - UniStay</title>
+    <link rel="stylesheet" href="student-dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 style="margin: 0; color: var(--primary-blue);">UniStay</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" class="active" onclick="loadSection('search')">
+                        <span class="sidebar-menu-icon">🔍</span> Search Hostels
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('bookings')">
+                        <span class="sidebar-menu-icon">📋</span> My Bookings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('favorites')">
+                        <span class="sidebar-menu-icon">⭐</span> Favorites
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('reviews')">
+                        <span class="sidebar-menu-icon">💬</span> My Reviews
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('messages')">
+                        <span class="sidebar-menu-icon">💌</span> Messages
+                    </a>
+                </li>
+                <li style="border-top: 1px solid var(--border-gray); margin-top: 2rem; padding-top: 2rem;">
+                    <a href="#" onclick="loadSection('profile')">
+                        <span class="sidebar-menu-icon">👤</span> Profile Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout()" style="color: var(--error);">
+                        <span class="sidebar-menu-icon">🚪</span> Logout
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome to UniStay</h1>
+                    <p style="margin: 0; color: var(--medium-gray);">Find your perfect student hostel</p>
+                </div>
+                <div class="user-info">
+                    <div>
+                        <p id="userName" style="margin: 0; font-weight: 600;"></p>
+                        <p id="userEmail" style="margin: 0; color: var(--medium-gray); font-size: 0.9rem;"></p>
+                    </div>
+                    <div class="user-avatar" id="userAvatar">S</div>
+                </div>
+            </div>
+
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+
+            <!-- Search Section (Default) -->
+            <section id="search-section">
+                <!-- Search Filters -->
+                <div class="search-filters">
+                    <div class="search-bar">
+                        <input type="text" id="searchQuery" placeholder="Search hostel name or location...">
+                        <button class="btn btn-primary" onclick="handleSearch()">Search</button>
+                    </div>
+
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label>City</label>
+                            <input type="text" id="filterCity" placeholder="e.g., Accra">
+                        </div>
+                        <div class="filter-group">
+                            <label>Min Price (₵)</label>
+                            <input type="number" id="filterMinPrice" placeholder="0">
+                        </div>
+                        <div class="filter-group">
+                            <label>Max Price (₵)</label>
+                            <input type="number" id="filterMaxPrice" placeholder="5000">
+                        </div>
+                        <div class="filter-group">
+                            <label>Bedrooms</label>
+                            <select id="filterBedrooms">
+                                <option value="">Any</option>
+                                <option value="1">1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3+ Bedrooms</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Property Type</label>
+                            <select id="filterType">
+                                <option value="">Any</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="House">House</option>
+                                <option value="Dormitory">Dormitory</option>
+                                <option value="Studio">Studio</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn-primary" onclick="handleSearch()">🔍 Apply Filters</button>
+                        <button class="btn btn-outline" onclick="clearFilters()">Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- Hostels Grid -->
+                <div id="loadingSpinner" class="hidden" style="text-align: center; padding: 2rem;">
+                    <div class="spinner" style="width: 50px; height: 50px; margin: 0 auto;"></div>
+                    <p style="margin-top: 1rem;">Loading hostels...</p>
+                </div>
+
+                <div id="hostelsContainer" class="hostels-container"></div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="pagination"></div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings-section" class="hidden">
+                <h2>My Bookings</h2>
+                <div id="bookingsContainer"></div>
+            </section>
+
+            <!-- Favorites Section -->
+            <section id="favorites-section" class="hidden">
+                <h2>My Favorite Hostels</h2>
+                <div id="favoritesContainer"></div>
+            </section>
+
+            <!-- Reviews Section -->
+            <section id="reviews-section" class="hidden">
+                <h2>My Reviews</h2>
+                <div id="reviewsContainer"></div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages-section" class="hidden">
+                <h2>Messages</h2>
+                <p>Coming soon...</p>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="hidden">
+                <h2>Profile Settings</h2>
+                <div class="card" style="max-width: 600px;">
+                    <div class="card-body">
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Phone</label>
+                                <input type="tel" id="profilePhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">Bio</label>
+                                <textarea id="profileBio" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Hostel Details -->
+    <div id="hostelModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 2000; overflow-y: auto;">
+        <div style="background: white; max-width: 800px; margin: 2rem auto; border-radius: 8px; padding: 2rem;">
+            <button onclick="closeHostelModal()" style="float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            <div id="hostelModalContent"></div>
+        </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/student-dashboard.js"></script>
+</body>
+
+</html>

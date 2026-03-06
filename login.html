@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UniStay | Student Hostel Platform</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <!-- Left Section - Hero -->
+        <div class="login-hero">
+            <div class="login-hero-content">
+                <div class="login-logo">🏠</div>
+                <h1>UniStay</h1>
+                <p>Find Your Perfect Student Home</p>
+
+                <div class="login-benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">✨</div>
+                        <div class="benefit-text">
+                            <h4>Wide Selection</h4>
+                            <p>Hundreds of verified hostels to choose from</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⭐</div>
+                        <div class="benefit-text">
+                            <h4>Verified Reviews</h4>
+                            <p>Real feedback from verified renters</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💬</div>
+                        <div class="benefit-text">
+                            <h4>Direct Communication</h4>
+                            <p>Chat directly with landlords</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section - Form -->
+        <div class="login-form-section">
+            <div class="login-form-wrapper">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your account</p>
+                </div>
+
+                <!-- Alert Messages -->
+                <div id="alertContainer"></div>
+
+                <form id="loginForm">
+                    <!-- Email -->
+                    <div class="login-form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@student.com" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="login-form-group">
+                        <label for="password">Password</label>
+                        <div class="login-password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" class="login-password-toggle" onclick="togglePassword('password')">👁️</button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="login-options">
+                        <div class="login-remember">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="login-forgot">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="login-btn-submit">
+                        <span id="submitText">Sign In</span>
+                        <span id="spinner" class="login-spinner hidden"></span>
+                    </button>
+                </form>
+
+                <!-- Sign Up Link -->
+                <div class="login-signup">
+                    <p>Don't have an account? <a href="register.html" class="auth-transition">Create an account</a></p>
+                    <p style="margin-top: 1rem;"><a href="signin.html" class="auth-transition" style="font-size: 0.9rem;">← Back to Sign In Options</a></p>
+                </div>
+
+                <!-- Demo Credentials -->
+                <div class="login-demo">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p><strong>Student:</strong> john@student.com</p>
+                    <p><strong>Landlord:</strong> jane@landlord.com</p>
+                    <p><strong>Admin:</strong> michael@unistay.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <script>
+        // Smooth page transitions
+        document.querySelectorAll('.auth-transition').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        });
+
+        // Fade in animation when page loads
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+    </script>
+</body>
+
+</html>

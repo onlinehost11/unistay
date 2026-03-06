@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - UniStay</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 style="margin: 0; color: var(--warning-orange);">UniStay Admin</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" class="active" onclick="loadSection('dashboard')">
+                        <span class="sidebar-menu-icon">📊</span> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('hostels')">
+                        <span class="sidebar-menu-icon">🏠</span> Hostel Verification
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('reviews')">
+                        <span class="sidebar-menu-icon">⭐</span> Review Moderation
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('flagged')">
+                        <span class="sidebar-menu-icon">🚩</span> Flagged Content
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('users')">
+                        <span class="sidebar-menu-icon">👥</span> Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('activity')">
+                        <span class="sidebar-menu-icon">📋</span> Activity Log
+                    </a>
+                </li>
+                <li style="border-top: 1px solid var(--border-gray); margin-top: 2rem; padding-top: 2rem;">
+                    <a href="#" onclick="logout()" style="color: var(--error);">
+                        <span class="sidebar-menu-icon">🚪</span> Logout
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Admin Panel</h1>
+                    <p style="margin: 0; color: var(--medium-gray);">Platform management & moderation</p>
+                </div>
+                <div class="user-info">
+                    <div>
+                        <p id="userName" style="margin: 0; font-weight: 600;"></p>
+                        <p style="margin: 0; color: var(--medium-gray); font-size: 0.9rem;">Administrator</p>
+                    </div>
+                    <div class="user-avatar" id="userAvatar">A</div>
+                </div>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <!-- Dashboard Section (Default) -->
+            <section id="dashboard-section">
+                <h2>Dashboard Overview</h2>
+
+                <div class="grid-3" style="margin-bottom: 2rem;">
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 id="stat-users" style="color: var(--primary-blue); margin: 0;">0</h3>
+                            <p style="margin: 0;">Total Users</p>
+                            <small id="stat-users-detail" style="color: var(--medium-gray);"></small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 id="stat-hostels" style="color: var(--primary-green); margin: 0;">0</h3>
+                            <p style="margin: 0;">Total Hostels</p>
+                            <small id="stat-hostels-detail" style="color: var(--medium-gray);"></small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 id="stat-pending" style="color: var(--warning-orange); margin: 0;">0</h3>
+                            <p style="margin: 0;">Pending Actions</p>
+                            <small id="stat-pending-detail" style="color: var(--medium-gray);"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="gap: 1.5rem;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Hostels</h3>
+                        </div>
+                        <div class="card-body">
+                            <p id="pending-hostels-count">0 properties awaiting verification</p>
+                            <button class="btn btn-warning" onclick="loadSection('hostels')">Review Hostels</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Reviews</h3>
+                        </div>
+                        <div class="card-body">
+                            <p id="pending-reviews-count">0 reviews awaiting approval</p>
+                            <button class="btn btn-warning" onclick="loadSection('reviews')">Moderate Reviews</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hostel Verification Section -->
+            <section id="hostels-section" class="hidden">
+                <h2>🏠 Hostel Listing Verification</h2>
+                <div id="hostelsContainer"></div>
+            </section>
+
+            <!-- Review Moderation Section -->
+            <section id="reviews-section" class="hidden">
+                <h2>⭐ Review Moderation</h2>
+                <div id="reviewsContainer"></div>
+            </section>
+
+            <!-- Flagged Content Section -->
+            <section id="flagged-section" class="hidden">
+                <h2>🚩 Flagged Content</h2>
+                <div id="flaggedContainer"></div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="hidden">
+                <h2>👥 Users Management</h2>
+                <div id="usersContainer">
+                    <p>User management interface coming soon...</p>
+                </div>
+            </section>
+
+            <!-- Activity Log Section -->
+            <section id="activity-section" class="hidden">
+                <h2>📋 Activity Log</h2>
+                <div id="activityContainer"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-dashboard.js"></script>
+</body>
+
+</html>

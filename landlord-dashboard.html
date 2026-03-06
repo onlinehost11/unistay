@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landlord Dashboard - UniStay</title>
+    <link rel="stylesheet" href="landlord-dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 style="margin: 0; color: var(--primary-green);">UniStay</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" class="active" onclick="loadSection('overview')">
+                        <span class="sidebar-menu-icon">📊</span> Overview
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('listings')">
+                        <span class="sidebar-menu-icon">🏠</span> My Listings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('add-listing')">
+                        <span class="sidebar-menu-icon">➕</span> Add New Listing
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('bookings')">
+                        <span class="sidebar-menu-icon">📋</span> Booking Requests
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('messages')">
+                        <span class="sidebar-menu-icon">💌</span> Messages
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="loadSection('reviews')">
+                        <span class="sidebar-menu-icon">⭐</span> Reviews & Ratings
+                    </a>
+                </li>
+                <li style="border-top: 1px solid var(--border-gray); margin-top: 2rem; padding-top: 2rem;">
+                    <a href="#" onclick="loadSection('profile')">
+                        <span class="sidebar-menu-icon">👤</span> Profile Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout()" style="color: var(--error);">
+                        <span class="sidebar-menu-icon">🚪</span> Logout
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Landlord Dashboard</h1>
+                    <p style="margin: 0; color: var(--medium-gray);">Manage your properties and bookings</p>
+                </div>
+                <div class="user-info">
+                    <div>
+                        <p id="userName" style="margin: 0; font-weight: 600;"></p>
+                        <p id="userEmail" style="margin: 0; color: var(--medium-gray); font-size: 0.9rem;"></p>
+                    </div>
+                    <div class="user-avatar" id="userAvatar">L</div>
+                </div>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <!-- Overview Section (Default) -->
+            <section id="overview-section">
+                <div class="grid-3" style="margin-bottom: 2rem;">
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary-green); margin: 0;">0</h3>
+                            <p style="margin: 0;">Active Listings</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary-blue); margin: 0;">0</h3>
+                            <p style="margin: 0;">Pending Bookings</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--warning-orange); margin: 0;">0</h3>
+                            <p style="margin: 0;">Unread Messages</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Welcome to Your Dashboard!</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Start by adding your first property listing or manage your existing properties from the sidebar menu.</p>
+                        <button class="btn btn-secondary" onclick="loadSection('add-listing')">
+                            ➕ Add Your First Listing
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Listings Section -->
+            <section id="listings-section" class="hidden">
+                <h2>My Listings</h2>
+                <div id="listingsContainer"></div>
+            </section>
+
+            <!-- Add Listing Section -->
+            <section id="add-listing-section" class="hidden">
+                <h2>Add New Listing</h2>
+                <div class="card" style="max-width: 800px;">
+                    <div class="card-body">
+                        <form id="addListingForm">
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label for="listingName">Property Name</label>
+                                    <input type="text" id="listingName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingType">Property Type</label>
+                                    <select id="listingType" required>
+                                        <option value="">Select type</option>
+                                        <option value="Apartment">Apartment</option>
+                                        <option value="House">House</option>
+                                        <option value="Dormitory">Dormitory</option>
+                                        <option value="Studio">Studio</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="listingDescription">Description</label>
+                                <textarea id="listingDescription" required></textarea>
+                            </div>
+
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label for="listingAddress">Address</label>
+                                    <input type="text" id="listingAddress" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingCity">City</label>
+                                    <input type="text" id="listingCity" required>
+                                </div>
+                            </div>
+
+                            <div class="grid-3">
+                                <div class="form-group">
+                                    <label for="listingPrice">Price per Month (₵)</label>
+                                    <input type="number" id="listingPrice" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingBedrooms">Bedrooms</label>
+                                    <input type="number" id="listingBedrooms">
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingBathrooms">Bathrooms</label>
+                                    <input type="number" id="listingBathrooms">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="listingAmenities">Amenities (comma-separated)</label>
+                                <input type="text" id="listingAmenities" placeholder="WiFi, Kitchen, Laundry...">
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary">Create Listing</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings-section" class="hidden">
+                <h2>Booking Requests</h2>
+                <div id="bookingsContainer"></div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages-section" class="hidden">
+                <h2>Messages</h2>
+                <p>Messaging interface coming soon...</p>
+            </section>
+
+            <!-- Reviews Section -->
+            <section id="reviews-section" class="hidden">
+                <h2>Reviews & Ratings</h2>
+                <div id="reviewsContainer"></div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="hidden">
+                <h2>Profile Settings</h2>
+                <div class="card" style="max-width: 600px;">
+                    <div class="card-body">
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Phone</label>
+                                <input type="tel" id="profilePhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">Bio</label>
+                                <textarea id="profileBio" placeholder="Tell students about yourself..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/landlord-dashboard.js"></script>
+</body>
+
+</html>

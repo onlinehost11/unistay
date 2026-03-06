@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - UniStay | Find Your Perfect Student Hostel</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="home-navbar">
+        <div class="home-navbar-container">
+            <div class="home-logo">
+                <a href="#home">🏠 UniStay</a>
+            </div>
+            <ul class="home-nav-links">
+                <li><a href="#hostels">Find Hostels</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="signin.html" class="home-btn-nav">Login</a></li>
+                <li><a href="signin.html" class="home-btn-nav home-btn-nav-primary">Sign Up</a></li>
+            </ul>
+            <div class="home-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="home-hero">
+        <div class="home-hero-content">
+            <h1>Find Your Perfect Student Home</h1>
+            <p>Discover verified, affordable hostels near your university</p>
+            <div class="home-hero-search">
+                <input type="text" id="searchInput" placeholder="Search by city, name, or amenities...">
+                <button id="searchBtn" class="home-btn home-btn-primary">Search</button>
+            </div>
+        </div>
+        <div class="home-hero-background"></div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="home-filters">
+        <div class="home-container">
+            <h3>Filter Hostels</h3>
+            <div class="home-filter-grid">
+                <div class="home-filter-group">
+                    <label for="priceFilter">Price Range</label>
+                    <select id="priceFilter">
+                        <option value="">All Prices</option>
+                        <option value="0-1000">₵0 - ₵1,000</option>
+                        <option value="1000-1500">₵1,000 - ₵1,500</option>
+                        <option value="1500-2000">₵1,500 - ₵2,000</option>
+                        <option value="2000+">₵2,000+</option>
+                    </select>
+                </div>
+
+                <div class="home-filter-group">
+                    <label for="ratingFilter">Minimum Rating</label>
+                    <select id="ratingFilter">
+                        <option value="">All Ratings</option>
+                        <option value="3">★ 3.0+</option>
+                        <option value="3.5">★ 3.5+</option>
+                        <option value="4">★ 4.0+</option>
+                        <option value="4.5">★ 4.5+</option>
+                    </select>
+                </div>
+
+                <div class="home-filter-group">
+                    <label for="typeFilter">Type</label>
+                    <select id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Dorm">Dorm</option>
+                        <option value="Studio">Studio</option>
+                    </select>
+                </div>
+
+                <button id="clearFilters" class="home-btn home-btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hostels Grid Section -->
+    <section id="hostels" class="home-hostels">
+        <div class="home-container">
+            <h2>Available Hostels</h2>
+            <p class="home-subtitle">Browse our collection of verified student hostels</p>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="home-loading">
+                <div class="home-spinner"></div>
+                <p>Loading hostels...</p>
+            </div>
+
+            <!-- Hostels Grid -->
+            <div id="hostelsGrid" class="home-grid">
+                <!-- Hostels will be dynamically loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="home-empty-state" style="display: none;">
+                <p>No hostels found. Try adjusting your filters.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="home-features">
+        <div class="home-container">
+            <h2>Why Choose UniStay?</h2>
+            <div class="home-features-grid">
+                <div class="home-feature-card">
+                    <div class="home-feature-icon">✨</div>
+                    <h3>Wide Selection</h3>
+                    <p>Browse hundreds of verified hostels across multiple cities</p>
+                </div>
+
+                <div class="home-feature-card">
+                    <div class="home-feature-icon">⭐</div>
+                    <h3>Verified Reviews</h3>
+                    <p>Real feedback from verified students and renters</p>
+                </div>
+
+                <div class="home-feature-card">
+                    <div class="home-feature-icon">💬</div>
+                    <h3>Direct Contact</h3>
+                    <p>Communicate directly with managers</p>
+                </div>
+
+                <div class="home-feature-card">
+                    <div class="home-feature-icon">🔒</div>
+                    <h3>Secure Booking</h3>
+                    <p>Safe and transparent booking process</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="home-contact">
+        <div class="home-container">
+            <h2>Get in Touch</h2>
+            <div class="home-contact-content">
+                <div class="home-contact-info">
+                    <h3>Contact UniStay</h3>
+                    <p>Have questions? We're here to help!</p>
+                    <div class="home-contact-details">
+                        <p><strong>Email:</strong> support@unistay.com</p>
+                        <p><strong>Phone:</strong> +233 123 456 789</p>
+                        <p><strong>Address:</strong> Accra, Ghana</p>
+                    </div>
+                </div>
+
+                <form class="home-contact-form">
+                    <div class="home-form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="home-form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="home-form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="home-btn home-btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+        <div class="home-container">
+            <div class="home-footer-content">
+                <div class="home-footer-section">
+                    <h4>UniStay</h4>
+                    <p>Your trusted platform for finding student hostels</p>
+                </div>
+
+                <div class="home-footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hostels">Find Hostels</a></li>
+                        <li><a href="../pages/register.html">Become a Landlord</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </div>
+
+                <div class="home-footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="home-footer-bottom">
+                <p>&copy; 2026 UniStay. All rights reserved. | Owner: Michael Owusu Ampofo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="home-modal">
+        <div class="home-modal-content">
+            <span class="home-modal-close">&times;</span>
+            <h2>Book This Hostel</h2>
+            <div id="modalHostelInfo"></div>
+            <form id="bookingForm">
+                <div class="home-form-group">
+                    <label for="checkInDate">Check-in Date</label>
+                    <input type="date" id="checkInDate" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="duration">Duration (Months)</label>
+                    <input type="number" id="duration" min="1" value="1" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="bookingName">Your Name</label>
+                    <input type="text" id="bookingName" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="bookingEmail">Your Email</label>
+                    <input type="email" id="bookingEmail" required>
+                </div>
+                <button type="submit" class="home-btn home-btn-primary">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Manager Modal -->
+    <div id="contactModal" class="home-modal">
+        <div class="home-modal-content">
+            <span class="home-modal-close">&times;</span>
+            <h2>Contact Manager</h2>
+            <div id="modalManagerInfo"></div>
+            <form id="contactForm">
+                <div class="home-form-group">
+                    <label for="contactName">Your Name</label>
+                    <input type="text" id="contactName" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="contactEmail">Your Email</label>
+                    <input type="email" id="contactEmail" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="contactPhone">Your Phone</label>
+                    <input type="tel" id="contactPhone" required>
+                </div>
+                <div class="home-form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="home-btn home-btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="home-alert-container"></div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/home.js"></script>
+
+    <script>
+        // Smooth page transitions for auth links
+        document.querySelectorAll('.home-nav-links a[href="signin.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        });
+
+        // Fade in animation when page loads
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+
+        if (document.body.style.opacity === '') {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        }
+    </script>
+</body>
+
+</html>
